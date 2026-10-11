@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: retailer-rewards-offers-system
+
+  profiles:
+    active: dev
