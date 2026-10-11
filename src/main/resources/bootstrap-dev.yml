@@ -4,3 +4,5 @@ spring:
 
   profiles:
     active: dev
+
+#Development environment property values if we have any

@@ -3,4 +3,6 @@ spring:
     name: retailer-rewards-offers-system
 
   profiles:
-    active: perf
+    active: prod
+
+#Production environment property values if we have any
