@@ -21,6 +21,7 @@ public class InMemoryTransactionRepository implements TransactionRepository {
         transactions.add(new Transaction("CUST06", LocalDate.parse("2026-03-01"), new java.math.BigDecimal("75.00")));
         transactions.add(new Transaction("CUST07", LocalDate.parse("2026-03-05"), new java.math.BigDecimal("99.50")));
         transactions.add(new Transaction("CUST08", LocalDate.parse("2026-03-10"), new java.math.BigDecimal("70.00")));
+
     }
 
     @Override public List<Transaction> findAll() { return List.copyOf(transactions); }

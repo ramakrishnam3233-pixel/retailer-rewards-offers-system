@@ -25,8 +25,8 @@ class RewardControllerIntegrationTest {
 
     @Test void returnsMonthlyAndTotalRewards() throws Exception {
         mockMvc.perform(get("/api/rewards")
-                        .param("startDate", "2025-01-01")
-                        .param("endDate", "2025-03-31"))
+                        .param("startDate", "2026-01-10")
+                        .param("endDate", "2026-03-10"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customers").isArray())
                 .andExpect(jsonPath("$.customers[0].customerId").exists())
@@ -35,8 +35,8 @@ class RewardControllerIntegrationTest {
 
     @Test void rejectsReversedDateRange() throws Exception {
         mockMvc.perform(get("/api/rewards")
-                        .param("startDate", "2025-03-31")
-                        .param("endDate", "2025-01-01"))
+                        .param("startDate", "2026-01-10")
+                        .param("endDate", "2026-01-01"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("startDate must be on or before endDate"));
     }
@@ -47,12 +47,12 @@ class RewardControllerIntegrationTest {
     }
 
     @Test void createsTransactionAndRejectsNegativeAmount() throws Exception {
-        var valid = new Transaction("IT-CUSTOMER", LocalDate.parse("2025-04-01"), new BigDecimal("120.00"));
+        var valid = new Transaction("CUST00", LocalDate.parse("2026-01-10"), new BigDecimal("120.00"));
         mockMvc.perform(post("/api/transactions").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(valid)))
                 .andExpect(status().isCreated());
 
-        var invalid = new Transaction("IT-CUSTOMER", LocalDate.parse("2025-04-01"), new BigDecimal("-10.00"));
+        var invalid = new Transaction("IT-CUSTOMER", LocalDate.parse("2026-01-10"), new BigDecimal("-10.00"));
         mockMvc.perform(post("/api/transactions").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalid)))
                 .andExpect(status().isBadRequest());
