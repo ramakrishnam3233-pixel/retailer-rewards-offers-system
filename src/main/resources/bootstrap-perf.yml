@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: retailer-rewards-offers-system
+
+  profiles:
+    active: perf
+
+#Performance environment property values if we have any
